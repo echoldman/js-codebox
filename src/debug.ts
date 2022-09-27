@@ -108,7 +108,7 @@ export class Debugger {
           (new Promise<void>((resolve: any) => {
             this._callbackGetVar({ comment, name })
             resolve();
-          })).then(() => { }).catch(() => { });
+          })).then(() => {}).catch(() => {});
         }
         break;
       }
@@ -117,7 +117,7 @@ export class Debugger {
           (new Promise<void>((resolve: any) => {
             this._callbackSetVar({ comment, name })
             resolve();
-          })).then(() => { }).catch(() => { });
+          })).then(() => {}).catch(() => {});
         }
         break;
       }
@@ -145,8 +145,8 @@ export class Debugger {
   }
 
   public continue(): boolean {
-    const breakpoint = this._breakpoints.pop();
-    if (breakpoint !== undefined) {
+    if (this._breakpoints.count > 0) {
+      const breakpoint = <Breakpoint>this._breakpoints.pop();
       const result = breakpoint.fun();
       breakpoint.resolve(result);
       return true;
